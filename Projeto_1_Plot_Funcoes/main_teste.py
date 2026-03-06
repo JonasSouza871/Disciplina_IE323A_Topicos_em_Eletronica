@@ -147,7 +147,7 @@ def gerenciar_grafico():
     leitura_y = adc_y.read_u16()
     diferenca = leitura_y - ADC_CENTRO
     if abs(diferenca) > ZONA_MORTA:
-        if diferenca > 0:
+        if diferenca < 0:
             nivel_zoom *= 1.1
         else:
             nivel_zoom /= 1.1

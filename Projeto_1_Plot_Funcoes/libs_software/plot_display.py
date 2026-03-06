@@ -96,5 +96,5 @@ class PlotDisplay:
         self.display.texto("Xv: {:.2f}".format(xv), 0, 16)
         self.display.texto("Yv: {:.2f}".format(yv), 0, 28)
         self.display.texto("Delta: {:.2f}".format(delta), 0, 40)
-        self.display.texto("BTN: Voltar", 0, 54)
+        self.display.texto("BTN C: Voltar", 0, 54)
         self.display.atualizar()
