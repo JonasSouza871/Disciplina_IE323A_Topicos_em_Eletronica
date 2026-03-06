@@ -51,13 +51,13 @@ class PlotDisplay:
             if 0 <= x_pos < 128:
                 self.display.linha_v(x_pos, centro_y - 2, centro_y + 2)
                 if i != 0 and ((abs(i) <= 10 and i % 5 == 0) or (abs(i) > 10 and i % 10 == 0)):
-                    self.display.texto(str(i), x_pos - 4, centro_y + 4)
+                    self.display.texto_mini(str(i), x_pos - 2, centro_y + 4)
             # Eixo Y
             y_pos = centro_y - int(i * escala_y)
             if 0 <= y_pos < 64:
                 self.display.linha_h(centro_x - 2, centro_x + 2, y_pos)
                 if i != 0 and ((abs(i) <= 10 and i % 5 == 0) or (abs(i) > 10 and i % 10 == 0)):
-                    self.display.texto(str(i), centro_x + 4, y_pos - 2)
+                    self.display.texto_mini(str(i), centro_x + 4, y_pos - 2)
         # Plotar a funcao
         func = FUNCOES[funcao_tipo]
         ultimo_y = -1

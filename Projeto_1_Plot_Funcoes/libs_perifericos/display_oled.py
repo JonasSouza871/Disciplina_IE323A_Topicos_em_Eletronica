@@ -1,6 +1,22 @@
 from machine import Pin, I2C
 from ssd1306 import SSD1306_I2C
-import math
+
+
+# Fonte 3x5 pixels para dígitos 0-9 e sinal de menos
+# Cada caractere é uma lista de 5 linhas (top→bottom), cada linha é 3 bits (MSB=esquerda)
+FONTE_3X5 = {
+    '0': [0b111, 0b101, 0b101, 0b101, 0b111],
+    '1': [0b010, 0b110, 0b010, 0b010, 0b111],
+    '2': [0b111, 0b001, 0b111, 0b100, 0b111],
+    '3': [0b111, 0b001, 0b111, 0b001, 0b111],
+    '4': [0b101, 0b101, 0b111, 0b001, 0b001],
+    '5': [0b111, 0b100, 0b111, 0b001, 0b111],
+    '6': [0b111, 0b100, 0b111, 0b101, 0b111],
+    '7': [0b111, 0b001, 0b001, 0b001, 0b001],
+    '8': [0b111, 0b101, 0b111, 0b101, 0b111],
+    '9': [0b111, 0b101, 0b111, 0b001, 0b111],
+    '-': [0b000, 0b000, 0b111, 0b000, 0b000],
+}
 
 
 class DisplayOLED:
@@ -24,6 +40,18 @@ class DisplayOLED:
 
     def texto(self, string, x, y, cor=1): #para por texto no dispaly
         self.display.text(string, x, y, cor)
+
+    def texto_mini(self, string, x, y, cor=1):
+        """Desenha texto com fonte 3x5 pixels (só números e '-'). Cada caractere ocupa 4px de largura (3+1 espaço)."""
+        for char in str(string):
+            glifo = FONTE_3X5.get(char)
+            if glifo:
+                for linha_idx in range(5):
+                    bits = glifo[linha_idx]
+                    for col in range(3):
+                        if bits & (0b100 >> col):
+                            self.pixel(x + col, y + linha_idx, cor)
+            x += 4  # avança 3px do caractere + 1px de espaço
 
     def linha_h(self, x0, x1, y, cor=1): #desenha linha horizontal, verificando se coordenadas estão dentro dos limites
         for x in range(x0, x1 + 1):
