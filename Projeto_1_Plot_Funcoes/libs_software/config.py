@@ -8,6 +8,9 @@ PINO_BOTAO_A = const(5)           # Incremento
 PINO_BOTAO_B = const(6)           # Decremento
 PINO_BOTAO_C = const(10)          # Seleciona/confirma
 
+# --- Buzzer ---
+PINO_BUZZER = const(21)
+
 # --- LED RGB (PWM) ---
 PINO_RGB_VERMELHO = const(13)
 PINO_RGB_VERDE = const(11)

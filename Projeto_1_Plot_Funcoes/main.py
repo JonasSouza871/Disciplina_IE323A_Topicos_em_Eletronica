@@ -4,6 +4,7 @@ import time
 from libs_software.config import *
 from libs_perifericos.display_oled import DisplayOLED
 from libs_perifericos.matriz_led import MatrizLED
+from libs_perifericos.buzzer import Buzzer
 from libs_software.plot_display import PlotDisplay
 
 
@@ -20,6 +21,7 @@ ultimo_botao_ms = 0
 # ---- Inicializacao de perifericos ----
 display = DisplayOLED(I2C_SDA, I2C_SCL, I2C_ID, OLED_ADDR)
 matriz = MatrizLED(PINO_WS2812)
+buzzer = Buzzer(PINO_BUZZER)
 plot = PlotDisplay(display)
 
 # Joystick ADC
@@ -74,6 +76,8 @@ def on_botao_c(pin):
     if not debounce_ok():
         return
 
+    buzzer.bip_confirma()
+
     if estado_atual == ESTADO_MENU:
         estado_atual = ESTADO_CONFIGURAR_PARAMETROS
         indice_parametro = 0
@@ -112,6 +116,7 @@ def on_botao_a(pin):
     if not debounce_ok():
         return
     if estado_atual == ESTADO_CONFIGURAR_PARAMETROS:
+        buzzer.bip_parametro()
         parametros[indice_parametro] += 0.5
         plot.desenhar_configuracao(indice_parametro, parametros)
 
@@ -122,6 +127,7 @@ def on_botao_b(pin):
     if not debounce_ok():
         return
     if estado_atual == ESTADO_CONFIGURAR_PARAMETROS:
+        buzzer.bip_parametro()
         parametros[indice_parametro] -= 0.5
         plot.desenhar_configuracao(indice_parametro, parametros)
 
@@ -147,8 +153,10 @@ def gerenciar_menu():
 
         if diferenca > 0 and funcao_selecionada > 0:
             funcao_selecionada -= 1
+            buzzer.bip_menu()
         elif diferenca < 0 and funcao_selecionada < TOTAL_FUNCOES - 1:
             funcao_selecionada += 1
+            buzzer.bip_menu()
 
         plot.desenhar_menu(funcao_selecionada)
         atualizar_cores_rgb()
