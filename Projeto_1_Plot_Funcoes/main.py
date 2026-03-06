@@ -33,7 +33,7 @@ for p in (pwm_r, pwm_g, pwm_b):
     p.freq(1000)
 
 # Botoes com pull-up
-btn_joystick = Pin(PINO_BOTAO_JOYSTICK, Pin.IN, Pin.PULL_UP)
+btn_c = Pin(PINO_BOTAO_C, Pin.IN, Pin.PULL_UP)
 btn_a = Pin(PINO_BOTAO_A, Pin.IN, Pin.PULL_UP)
 btn_b = Pin(PINO_BOTAO_B, Pin.IN, Pin.PULL_UP)
 
@@ -67,8 +67,8 @@ def debounce_ok():
 
 
 # ---- Callbacks dos botoes (IRQ) ----
-def on_botao_joystick(pin):
-    """Botao C - Seleciona / Confirma / Volta."""
+def on_botao_c(pin):
+    """Botao C (GPIO 10) - Seleciona / Confirma / Volta."""
     global estado_atual, indice_parametro, parametros, nivel_zoom, pos_central_x
 
     if not debounce_ok():
@@ -127,7 +127,7 @@ def on_botao_b(pin):
 
 
 # ---- Registrar interrupcoes ----
-btn_joystick.irq(trigger=Pin.IRQ_FALLING, handler=on_botao_joystick)
+btn_c.irq(trigger=Pin.IRQ_FALLING, handler=on_botao_c)
 btn_a.irq(trigger=Pin.IRQ_FALLING, handler=on_botao_a)
 btn_b.irq(trigger=Pin.IRQ_FALLING, handler=on_botao_b)
 

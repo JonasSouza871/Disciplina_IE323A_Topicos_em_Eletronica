@@ -1,10 +1,12 @@
 from micropython import const
 
-# --- Pinos do Joystick e Botoes ---
+# --- Pinos do Joystick e Botoes (BitDogLab v7) ---
+PINO_JOYSTICK_X = const(27)       # ADC1
 PINO_JOYSTICK_Y = const(26)       # ADC0
-PINO_BOTAO_JOYSTICK = const(22)   # Botao C (seleciona/confirma)
+PINO_BOTAO_JOYSTICK = const(22)   # Joystick SW
 PINO_BOTAO_A = const(5)           # Incremento
 PINO_BOTAO_B = const(6)           # Decremento
+PINO_BOTAO_C = const(10)          # Seleciona/confirma
 
 # --- LED RGB (PWM) ---
 PINO_RGB_VERMELHO = const(13)
@@ -12,8 +14,8 @@ PINO_RGB_VERDE = const(11)
 PINO_RGB_AZUL = const(12)
 
 # --- Display OLED I2C ---
-I2C_SDA = const(14)
-I2C_SCL = const(15)
+I2C_SDA = const(2)
+I2C_SCL = const(3)
 I2C_ID = const(1)
 OLED_ADDR = const(0x3C)
 
