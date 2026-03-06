@@ -7,7 +7,7 @@ class Buzzer:
         self.pwm = PWM(Pin(pino))
         self.pwm.duty_u16(0)
 
-    def _beep(self, freq, duracao_ms):
+    def _beep(self, freq, duracao_ms): #função que recebera a frequencia e duração para faze ro bip
         self.pwm.freq(freq)
         self.pwm.duty_u16(32768)  # 50% duty cycle
         time.sleep_ms(duracao_ms)
