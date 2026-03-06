@@ -8,22 +8,20 @@ class PlotDisplay:
     def __init__(self, display):
         self.display = display
 
-    # ---- TELA 1: MENU ----
+    #TELA 1: MENU 
     def desenhar_menu(self, funcao_selecionada):
         self.display.limpar()
         self.display.texto("SELECIONE:", 0, 0)
-
-        for i in range(TOTAL_FUNCOES):
+        for i in range(TOTAL_FUNCOES): #para todas as funçoes
             y = 16 + i * 12
             if i == funcao_selecionada:
                 self.display.texto(">", 4, y)
                 self.display.texto(NOMES_FUNCOES[i], 16, y)
             else:
                 self.display.texto(NOMES_FUNCOES[i], 12, y)
+        self.display.atualizar() #atualiza display
 
-        self.display.atualizar()
-
-    # ---- TELA 2: CONFIGURAR PARAMETROS ----
+    #TELA 2: CONFIGURAR PARAMETROS
     def desenhar_configuracao(self, indice_param, parametros):
         self.display.limpar()
         nomes = ["A", "B", "C", "D"]
