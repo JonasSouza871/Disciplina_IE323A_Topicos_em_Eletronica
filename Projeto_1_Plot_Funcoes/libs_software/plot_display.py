@@ -31,22 +31,18 @@ class PlotDisplay:
         self.display.texto("A:{:.1f} B:{:.1f}".format(parametros[0], parametros[1]), 0, 30)
         self.display.texto("C:{:.1f} D:{:.1f}".format(parametros[2], parametros[3]), 0, 40)
         self.display.texto("BTN: Confirmar", 0, 54)
-
         self.display.atualizar()
 
-    # ---- TELA 3: PLOT GRAFICO ----
+    # TELA 3: PLOT GRAFICO 
     def desenhar_grafico(self, funcao_tipo, parametros, nivel_zoom, pos_central_x):
         self.display.limpar()
-
         centro_x = 64
         centro_y = 32
         escala_x = nivel_zoom
         escala_y = 0.5 * nivel_zoom
-
         # Eixos
         self.display.linha_v(centro_x, 0, 63)
         self.display.linha_h(0, 127, centro_y)
-
         # Marcadores nos eixos
         esp = 5
         for i in range(-30, 31, esp):
@@ -56,14 +52,12 @@ class PlotDisplay:
                 self.display.linha_v(x_pos, centro_y - 2, centro_y + 2)
                 if i != 0 and ((abs(i) <= 10 and i % 5 == 0) or (abs(i) > 10 and i % 10 == 0)):
                     self.display.texto(str(i), x_pos - 4, centro_y + 4)
-
             # Eixo Y
             y_pos = centro_y - int(i * escala_y)
             if 0 <= y_pos < 64:
                 self.display.linha_h(centro_x - 2, centro_x + 2, y_pos)
                 if i != 0 and ((abs(i) <= 10 and i % 5 == 0) or (abs(i) > 10 and i % 10 == 0)):
                     self.display.texto(str(i), centro_x + 4, y_pos - 2)
-
         # Plotar a funcao
         func = FUNCOES[funcao_tipo]
         ultimo_y = -1
@@ -90,21 +84,17 @@ class PlotDisplay:
                 ultimo_y = y_pos
             else:
                 ultimo_y = -1
-
         # Info zoom
         self.display.texto("Zoom:{:.1f}x".format(nivel_zoom), 0, 55)
         self.display.atualizar()
 
-    # ---- TELA 4: VALORES QUADRATICA ----
+    # TELA 4: VALORES QUADRATICA 
     def desenhar_valores_quadratica(self, parametros):
         self.display.limpar()
-
-        xv, yv, delta = calcular_vertice_delta(parametros)
-
+        xv, yv, delta = calcular_vertice_delta(parametros) #calcula vlaores vertice
         self.display.texto("VALORES QUADRATICA", 0, 0)
         self.display.texto("Xv: {:.2f}".format(xv), 0, 16)
         self.display.texto("Yv: {:.2f}".format(yv), 0, 28)
         self.display.texto("Delta: {:.2f}".format(delta), 0, 40)
         self.display.texto("BTN: Voltar", 0, 54)
-
         self.display.atualizar()
