@@ -30,7 +30,7 @@ class PlotDisplay:
         self.display.texto("Valor: {:.1f}".format(parametros[indice_param]), 0, 16)
         self.display.texto("A:{:.1f} B:{:.1f}".format(parametros[0], parametros[1]), 0, 30)
         self.display.texto("C:{:.1f} D:{:.1f}".format(parametros[2], parametros[3]), 0, 40)
-        self.display.texto("BTN: Confirmar", 0, 54)
+        self.display.texto("BTN C: Confirmar", 0, 54)
         self.display.atualizar()
 
     # TELA 3: PLOT GRAFICO 
@@ -84,8 +84,8 @@ class PlotDisplay:
                 ultimo_y = y_pos
             else:
                 ultimo_y = -1
-        # Info zoom
-        self.display.texto("Zoom:{:.1f}x".format(nivel_zoom), 0, 55)
+        # Info zoom (fonte mini para não cobrir o gráfico)
+        self.display.texto_mini("Zoom:{:.1f}x".format(nivel_zoom), 0, 59)
         self.display.atualizar()
 
     # TELA 4: VALORES QUADRATICA 
