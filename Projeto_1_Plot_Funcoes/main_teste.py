@@ -126,14 +126,14 @@ def gerenciar_menu():
     leitura_y = adc_y.read_u16()
     diferenca = leitura_y - ADC_CENTRO
     if abs(diferenca) > ZONA_MORTA:
-        if diferenca > 0:
+        if diferenca < 0:
             matriz.mostrar_seta(True)
         else:
             matriz.mostrar_seta(False)
-        if diferenca > 0 and funcao_selecionada > 0:
+        if diferenca < 0 and funcao_selecionada > 0:
             funcao_selecionada -= 1
             buzzer.bip_menu()
-        elif diferenca < 0 and funcao_selecionada < TOTAL_FUNCOES - 1:
+        elif diferenca > 0 and funcao_selecionada < TOTAL_FUNCOES - 1:
             funcao_selecionada += 1
             buzzer.bip_menu()
         plot.desenhar_menu(funcao_selecionada)

@@ -19,7 +19,7 @@ I2C_ID = const(1) #conectado no I2C1
 OLED_ADDR = const(0x3C)
 PINO_WS2812 = const(7) #matriz de led
 ATRASO_DEBOUNCE_MS = const(300) #debounce
-ZONA_MORTA = const(300) #zona morta do joystick
+ZONA_MORTA = const(4800) #zona morta do joystick (ajustado para ADC 16 bits)
 ADC_CENTRO = const(32768) #MicroPython ADC retorna 0-65535 (16 bits)
 
 #Tipos de funcao
